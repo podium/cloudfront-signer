@@ -4,7 +4,9 @@ defmodule CloudfrontSignerTest do
 
   describe "#sign/3" do
     test "it will return something" do
-      distribution = CloudfrontSigner.Distribution.from_config(:cloudfront_signer, CloudfrontSignerTest)
+      distribution =
+        CloudfrontSigner.Distribution.from_config(:cloudfront_signer, CloudfrontSignerTest)
+
       signed_url = CloudfrontSigner.sign(distribution, "/bucket/key", [arg: "val"], 60 * 1000)
 
       assert signed_url =~ "Signature"

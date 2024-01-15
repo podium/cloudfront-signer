@@ -7,7 +7,7 @@ defmodule CloudfrontSigner.Signature do
   @doc """
   Converts a `Policy.t` struct to a cloudfront signature for the given private key
   """
-  @spec signature(Policy.t, tuple) :: binary
+  @spec signature(Policy.t(), tuple) :: binary
   def signature(%Policy{} = policy, private_key) do
     to_string(policy)
     |> :public_key.sign(:sha, private_key)
