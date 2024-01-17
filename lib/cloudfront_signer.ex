@@ -17,8 +17,8 @@ defmodule CloudfrontSigner do
   def sign(
         %Distribution{domain: domain, private_key: pk, key_pair_id: kpi},
         path,
-        query_params \\ [],
-        expiry
+        expiry,
+        query_params \\ []
       ) do
     expiry = Timex.now() |> Timex.shift(seconds: expiry) |> Timex.to_unix()
     base_url = URI.merge(domain, path) |> to_string()
