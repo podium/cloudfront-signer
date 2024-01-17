@@ -13,7 +13,7 @@ defmodule CloudfrontSigner do
   Signs a url for the given `Distribution.t` struct constructed from the `path` and `query_params` provided.  `expiry`
   is in seconds.
   """
-  @spec sign(Distribution.t(), binary, list, integer) :: binary
+  @spec sign(Distribution.t(), binary | list | map, list, integer) :: binary
   def sign(
         %Distribution{domain: domain, private_key: pk, key_pair_id: kpi},
         path,
