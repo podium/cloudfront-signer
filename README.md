@@ -16,7 +16,7 @@ def deps do
 end
 ```
 
-Consult the [https://hexdocs.pm/mix/1.16.0/Mix.Tasks.Deps.html](mix documentation for git based dependencies) for valid syntax options.
+Consult the [mix documentation for git based dependencies](https://hexdocs.pm/mix/1.16.0/Mix.Tasks.Deps.html) for valid syntax options.
 
 Configure a distribution with:
 
