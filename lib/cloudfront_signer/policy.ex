@@ -6,28 +6,37 @@ defmodule CloudfrontSigner.Policy do
 
   @type t :: %__MODULE__{}
 
-  defimpl String.Chars, for: CloudfrontSigner.Policy do
-    @doc """
-    json encodes a policy
-    """
-    def to_string(%{resource: resource, expiry: expiry}) do
-      aws_policy(resource, expiry)
+  def generate_signature_and_policy(%__MODULE__{} = policy, private_key) do
+    policy_as_str =
+      aws_policy(policy.resource, policy.expiry)
       |> Jason.encode!()
-    end
 
-    defp aws_policy(resource, expiry) do
-      %{
-        Statement: [
-          %{
-            Resource: resource,
-            Condition: %{
-              DateLessThan: %{
-                "AWS:EpochTime" => expiry
-              }
+    signature =
+      policy_as_str
+      |> String.replace(~r/\s+/, "")
+      |> :public_key.sign(:sha, private_key)
+      |> Base.encode64()
+      |> String.replace(["+", "=", "/"], fn
+        "+" -> "-"
+        "=" -> "_"
+        "/" -> "~"
+      end)
+
+    {signature, Base.encode64(policy_as_str)}
+  end
+
+  defp aws_policy(resource, expiry) do
+    %{
+      "Statement" => [
+        %{
+          "Resource" => resource,
+          "Condition" => %{
+            "DateLessThan" => %{
+              "AWS:EpochTime" => expiry
             }
           }
-        ]
-      }
-    end
+        }
+      ]
+    }
   end
 end
