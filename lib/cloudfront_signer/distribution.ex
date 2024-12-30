@@ -6,7 +6,7 @@ defmodule CloudfrontSigner.Distribution do
   defstruct [:private_key, :domain, :key_pair_id]
 
   @type t :: %__MODULE__{}
-  
+
   @doc """
   Creates a `Distribution.t` record from the contents of `Application.get_env(app, scope)`
   """
@@ -39,5 +39,6 @@ defmodule CloudfrontSigner.Distribution do
       _ -> raise ArgumentError, "Invalid PEM for cloudfront private key"
     end
   end
+
   defp decode_pk(dist), do: dist
 end

@@ -30,4 +30,3 @@ defmodule CloudfrontSigner.SignatureTest do
     end
   end
 end
-

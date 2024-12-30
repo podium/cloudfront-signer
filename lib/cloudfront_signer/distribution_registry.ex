@@ -23,4 +23,3 @@ defmodule CloudfrontSigner.DistributionRegistry do
     )
   end
 end
-

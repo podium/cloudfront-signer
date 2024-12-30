@@ -24,6 +24,7 @@ defmodule CloudfrontSigner do
     expiry = Timex.now() |> Timex.shift(seconds: expiry) |> Timex.to_unix()
     base_url = URI.merge(domain, path) |> to_string()
     url = url(base_url, query_params)
+
     {signature, encoded_policy} =
       Policy.generate_signature_and_policy(%Policy{resource: url, expiry: expiry}, pk)
 
