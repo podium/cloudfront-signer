@@ -7,7 +7,8 @@ defmodule CloudfrontSigner do
   |> CloudfrontSigner.sign("some/path", [arg: "val"], some_expiry)
   ```
   """
-  alias CloudfrontSigner.{Distribution, Policy, Signature}
+  alias CloudfrontSigner.Distribution
+  alias CloudfrontSigner.Policy
 
   @doc """
   Signs a url for the given `Distribution.t` struct constructed from the `path` and `query_params` provided.  `expiry`

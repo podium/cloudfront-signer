@@ -23,3 +23,5 @@ erl_crash.dump
 cloudfront_signer-*.tar
 
 .env
+
+.lexical/
