@@ -22,6 +22,7 @@ defmodule CloudfrontSigner.MixProject do
     [
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.4", only: [:dev], runtime: false},
+      {:ex_doc, "~> 0.36", only: [:dev], runtime: false},
       {:jason, "~> 1.4"},
       {:timex, "~> 3.7"}
     ]
