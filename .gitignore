@@ -10,6 +10,9 @@
 # Where 3rd-party dependencies like ExDoc output generated docs.
 /doc/
 
+# Where Dialyzer stores its PLT files.
+/priv/plts/
+
 # Ignore .fetch files in case you like to edit your project deps locally.
 /.fetch
 
@@ -23,3 +26,5 @@ erl_crash.dump
 cloudfront_signer-*.tar
 
 .env
+
+.lexical/

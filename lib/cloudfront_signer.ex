@@ -7,7 +7,8 @@ defmodule CloudfrontSigner do
   |> CloudfrontSigner.sign("some/path", [arg: "val"], some_expiry)
   ```
   """
-  alias CloudfrontSigner.{Distribution, Policy, Signature}
+  alias CloudfrontSigner.Distribution
+  alias CloudfrontSigner.Policy
 
   @doc """
   Signs a url for the given `Distribution.t` struct constructed from the `path` and `query_params` provided.  `expiry`
@@ -23,6 +24,7 @@ defmodule CloudfrontSigner do
     expiry = Timex.now() |> Timex.shift(seconds: expiry) |> Timex.to_unix()
     base_url = URI.merge(domain, path) |> to_string()
     url = url(base_url, query_params)
+
     {signature, encoded_policy} =
       Policy.generate_signature_and_policy(%Policy{resource: url, expiry: expiry}, pk)
 

@@ -11,7 +11,9 @@ by adding `cloudfront_signer` to your list of dependencies in `mix.exs` as a git
 ```elixir
 def deps do
   [
-    {:cloudfront_signer, github: "johnmcguin/cloudfront-signer", ref: "320990b662218a922e510f390f6fad81ee1271e8"},
+    {:cloudfront_signer,
+       git: "https://github.com/podium/cloudfront-signer.git",
+       ref: "73b53cf1364d92708f43ca60dc7150a61cfa5191"}
   ]
 end
 ```

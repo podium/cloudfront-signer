@@ -1,4 +1,8 @@
 defmodule CloudfrontSigner.Application do
+  @moduledoc """
+  This module is the entry point for the CloudfrontSigner application.
+  """
+
   use Application
 
   def start(_type, _args) do
