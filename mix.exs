@@ -61,7 +61,7 @@ defmodule CloudfrontSigner.MixProject do
       maintainers: ["Podium"],
       links: %{
         "GitHub" => @source_url,
-        "Docs" => "https://hexdocs.pm/cloudfront-signer/#{@version}/",
+        "Docs" => "https://hexdocs.pm/cloudfront_signer/#{@version}/",
         "Changelog" => "#{@source_url}/blob/master/CHANGELOG.md"
       }
     ]
