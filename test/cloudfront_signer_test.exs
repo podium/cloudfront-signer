@@ -7,7 +7,7 @@ defmodule CloudfrontSignerTest do
       distribution =
         CloudfrontSigner.Distribution.from_config(:cloudfront_signer, CloudfrontSignerTest)
 
-      signed_url = CloudfrontSigner.sign(distribution, "/bucket/key", 60, [arg: "val"])
+      signed_url = CloudfrontSigner.sign(distribution, "/bucket/key", 60, arg: "val")
 
       assert signed_url =~ "Policy="
       assert signed_url =~ "Signature="
