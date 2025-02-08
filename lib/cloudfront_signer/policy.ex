@@ -26,17 +26,20 @@ defmodule CloudfrontSigner.Policy do
   end
 
   defp aws_policy(resource, expiry) do
-    %{
-      "Statement" => [
-        %{
-          "Resource" => resource,
-          "Condition" => %{
-            "DateLessThan" => %{
-              "AWS:EpochTime" => expiry
-            }
-          }
-        }
-      ]
-    }
+    Jason.OrderedObject.new([
+      {"Statement",
+       [
+         Jason.OrderedObject.new([
+           {"Resource", resource},
+           {"Condition",
+            Jason.OrderedObject.new([
+              {"DateLessThan",
+               Jason.OrderedObject.new([
+                 {"AWS:EpochTime", expiry}
+               ])}
+            ])}
+         ])
+       ]}
+    ])
   end
 end
