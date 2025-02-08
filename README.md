@@ -1,7 +1,12 @@
 # CloudfrontSigner
 
 Elixir implementation of Cloudfront's url signature algorithm. Supports expiration policies and
-runtime configurable distributions. Fork of https://github.com/Frameio/cloudfront-signer
+runtime configurable distributions. Fork of https://github.com/Frameio/cloudfront-signer.
+
+The main benefits that this library provides are:
+
+- Runtime configurable distributions
+- Caching of PEM decodes
 
 ## Installation
 
@@ -10,7 +15,7 @@ Add `cloudfront_signer` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:cloudfront_signer, "~> 0.2.0"}
+    {:cloudfront_signer, "~> 1.0.0"}
   ]
 end
 ```

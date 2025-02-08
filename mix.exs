@@ -2,7 +2,7 @@ defmodule CloudfrontSigner.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/podium/cloudfront-signer"
-  @version "0.2.0"
+  @version "1.0.0"
 
   def project do
     [
