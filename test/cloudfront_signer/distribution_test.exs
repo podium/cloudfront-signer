@@ -13,8 +13,8 @@ defmodule CloudfrontSigner.DistributionTest do
       assert distribution.domain =~ "cloudfront.net"
 
       assert match?(
-               {:RSAPrivateKey, :"two-prime", _modulus, _public_exponent, _private_exponent,
-                _prime1, _prime2, _exponent1, _exponent2, _coefficient, _other_prime_infos},
+               {:RSAPrivateKey, :"two-prime", _modulus, _public_exponent, _private_exponent, _prime1, _prime2, _exponent1,
+                _exponent2, _coefficient, _other_prime_infos},
                distribution.private_key
              )
 
@@ -44,8 +44,8 @@ defmodule CloudfrontSigner.DistributionTest do
       distribution = Distribution.from_config(:cloudfront_signer, :test_file_config)
 
       assert match?(
-               {:RSAPrivateKey, :"two-prime", _modulus, _public_exponent, _private_exponent,
-                _prime1, _prime2, _exponent1, _exponent2, _coefficient, _other_prime_infos},
+               {:RSAPrivateKey, :"two-prime", _modulus, _public_exponent, _private_exponent, _prime1, _prime2, _exponent1,
+                _exponent2, _coefficient, _other_prime_infos},
                distribution.private_key
              )
     end

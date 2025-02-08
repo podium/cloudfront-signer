@@ -1,5 +1,6 @@
 defmodule CloudfrontSigner.PolicyTest do
   use ExUnit.Case, async: true
+
   alias CloudfrontSigner.Policy
 
   @test_private_key_path "test/support/test_private_key.pem"

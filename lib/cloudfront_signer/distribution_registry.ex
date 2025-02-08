@@ -3,6 +3,7 @@ defmodule CloudfrontSigner.DistributionRegistry do
   Agent to store and fetch cloudfront distributions, to avoid expensive runtime pem decodes
   """
   use Agent
+
   alias CloudfrontSigner.Distribution
 
   def start_link(_opts) do

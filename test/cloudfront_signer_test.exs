@@ -1,5 +1,6 @@
 defmodule CloudfrontSignerTest do
   use ExUnit.Case, async: true
+
   doctest CloudfrontSigner
 
   describe "#sign/3" do

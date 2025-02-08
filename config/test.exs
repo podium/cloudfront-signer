@@ -1,5 +1,10 @@
 import Config
 
+config :cloudfront_signer, CloudfrontSigner.DistributionRegistryTest,
+  domain: "https://test.cloudfront.net",
+  private_key: System.get_env("TESTING_PRIVATE_KEY"),
+  key_pair_id: "a_key_pair"
+
 config :cloudfront_signer, CloudfrontSignerTest,
   domain: "https://test.cloudfront.net",
   private_key:
@@ -13,11 +18,6 @@ config :cloudfront_signer, CloudfrontSignerTest,
   key_pair_id: "a_key_pair"
 
 config :cloudfront_signer,
-  domain: "https://test.cloudfront.net",
-  private_key: System.get_env("TESTING_PRIVATE_KEY"),
-  key_pair_id: "a_key_pair"
-
-config :cloudfront_signer, CloudfrontSigner.DistributionRegistryTest,
   domain: "https://test.cloudfront.net",
   private_key: System.get_env("TESTING_PRIVATE_KEY"),
   key_pair_id: "a_key_pair"

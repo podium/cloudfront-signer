@@ -12,15 +12,16 @@ defmodule CloudfrontSigner.Distribution do
   """
   @spec from_config(atom, atom) :: t
   def from_config(app, scope) do
-    Application.get_env(app, scope)
+    app
+    |> Application.get_env(scope)
     |> Enum.map(&parse_config/1)
     |> Enum.filter(& &1)
-    |> Enum.into(%{})
+    |> Map.new()
     |> from_map()
   end
 
   @spec from_map(map) :: t
-  def from_map(map), do: struct(__MODULE__, map) |> decode_pk()
+  def from_map(map), do: __MODULE__ |> struct(map) |> decode_pk()
 
   defp parse_config({:domain, value}), do: {:domain, read_value(value)}
   defp parse_config({:private_key, value}), do: {:private_key, read_value(value)}
@@ -32,7 +33,8 @@ defmodule CloudfrontSigner.Distribution do
   defp read_value(value) when is_binary(value), do: value
 
   defp decode_pk(%__MODULE__{private_key: pk} = dist) when is_binary(pk) do
-    String.trim(pk)
+    pk
+    |> String.trim()
     |> :public_key.pem_decode()
     |> case do
       [pem_entry] -> %{dist | private_key: :public_key.pem_entry_decode(pem_entry)}

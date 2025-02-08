@@ -8,7 +8,8 @@ defmodule CloudfrontSigner.Policy do
 
   def generate_signature_and_policy(%__MODULE__{} = policy, private_key) do
     policy_as_str =
-      aws_policy(policy.resource, policy.expiry)
+      policy.resource
+      |> aws_policy(policy.expiry)
       |> Jason.encode!()
 
     signature =
