@@ -5,15 +5,12 @@ runtime configurable distributions. Fork of https://github.com/Frameio/cloudfron
 
 ## Installation
 
-The patched package can be installed
-by adding `cloudfront_signer` to your list of dependencies in `mix.exs` as a git based dependency:
+Add `cloudfront_signer` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:cloudfront_signer,
-       git: "https://github.com/podium/cloudfront-signer.git",
-       ref: "73b53cf1364d92708f43ca60dc7150a61cfa5191"}
+    {:cloudfront_signer, "~> 0.2.0"}
   ]
 end
 ```
@@ -25,8 +22,8 @@ Configure a distribution with:
 ```elixir
 config :my_app, :my_distribution,
   domain: "https://some.cloudfront.domain",
-  private_key: {:system, "ENV_VAR"}, # or {:file, "/path/to/key"}
-  key_pair_id: {:system, "OTHER_ENV_VAR"}
+  private_key: System.get_env("PRIVATE_KEY"), # or {:file, "/path/to/key"}
+  key_pair_id: System.get_env("KEY_PAIR_ID")
 ```
 
 Then simply do:
