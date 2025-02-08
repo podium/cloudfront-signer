@@ -8,7 +8,7 @@ defmodule CloudfrontSigner.MixProject do
     [
       app: :cloudfront_signer,
       version: @version,
-      elixir: "~> 1.16",
+      elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
       source_url: @source_url,
       deps: deps(),
