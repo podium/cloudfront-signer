@@ -27,7 +27,6 @@ defmodule CloudfrontSigner.MixProject do
 
   def application do
     [
-      mod: {CloudfrontSigner.Application, []},
       extra_applications: [:logger]
     ]
   end

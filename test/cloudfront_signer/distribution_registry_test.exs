@@ -4,6 +4,11 @@ defmodule CloudfrontSigner.DistributionRegistryTest do
   alias CloudfrontSigner.Distribution
   alias CloudfrontSigner.DistributionRegistry
 
+  setup do
+    start_supervised!(DistributionRegistry)
+    :ok
+  end
+
   describe "get_distribution/2" do
     test "returns cached distribution" do
       first_distribution = DistributionRegistry.get_distribution(:cloudfront_signer, __MODULE__)
