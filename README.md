@@ -15,7 +15,7 @@ def deps do
 end
 ```
 
-Consult the [mix documentation for git based dependencies](https://hexdocs.pm/mix/1.16.0/Mix.Tasks.Deps.html) for valid syntax options.
+## Configuring a Distribution
 
 Configure a distribution with:
 
@@ -26,16 +26,36 @@ config :my_app, :my_distribution,
   key_pair_id: System.get_env("KEY_PAIR_ID")
 ```
 
-Then simply do:
+## Signing a URL without Caching PEM Decodes
+
+Caching PEM decodes is a wise choice, but if you don't want to cache them, you can do the following:
 
 ```elixir
 CloudfrontSigner.Distribution.from_config(:my_app, :my_distribution)
 |> CloudfrontSigner.sign(path, [arg: "value"], expiry_in_seconds)
 ```
 
-If you want to cache pem decodes (which is a wise choice), a registry of decoded distributions is available. Simply do:
+## Caching PEM Decodes
+
+If you want to cache PEM decodes, you can use the distribution registry. 
+Add `CloudfrontSigner.DistributionRegistry` to your application's supervision tree:
+
+```elixir
+# In your application.ex
+def start(_type, _args) do
+  children = [
+    # ... other children ...
+    CloudfrontSigner.DistributionRegistry
+  ]
+
+  opts = [strategy: :one_for_one, name: YourApp.Supervisor]
+  Supervisor.start_link(children, opts)
+end
+```
+
+Then use it like:
 
 ```elixir
 CloudfrontSigner.DistributionRegistry.get_distribution(:my_app, :my_distribution)
-|> CloudfrontSigner.sign(path, [arg: "value], expiry)
+|> CloudfrontSigner.sign(path, [arg: "value"], expiry)
 ```
