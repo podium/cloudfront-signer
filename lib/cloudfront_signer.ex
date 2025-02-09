@@ -16,9 +16,16 @@ defmodule CloudfrontSigner do
   """
   @spec sign(Distribution.t(), binary | list | map, list, integer) :: binary
   def sign(%Distribution{domain: domain, private_key: pk, key_pair_id: kpi}, path, expiry, query_params \\ []) do
-    expiry = DateTime.utc_now() |> DateTime.add(expiry, :second) |> DateTime.to_unix()
-    base_url = domain |> URI.merge(path) |> to_string()
-    url = url(base_url, query_params)
+    expiry =
+      DateTime.utc_now()
+      |> DateTime.add(expiry, :second)
+      |> DateTime.to_unix()
+
+    url =
+      domain
+      |> URI.merge(path)
+      |> to_string()
+      |> url(query_params)
 
     {signature, encoded_policy} =
       Policy.generate_signature_and_policy(%Policy{resource: url, expiry: expiry}, pk)

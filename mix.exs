@@ -27,7 +27,7 @@ defmodule CloudfrontSigner.MixProject do
 
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger, :public_key]
     ]
   end
 
@@ -37,8 +37,7 @@ defmodule CloudfrontSigner.MixProject do
       {:dialyxir, "~> 1.4", only: [:dev], runtime: false},
       {:ex_doc, "~> 0.36", only: [:dev], runtime: false},
       {:jason, "~> 1.4"},
-      {:styler, "~> 1.3", only: [:dev, :test], runtime: false},
-      {:timex, "~> 3.7"}
+      {:styler, "~> 1.3", only: [:dev, :test], runtime: false}
     ]
   end
 
