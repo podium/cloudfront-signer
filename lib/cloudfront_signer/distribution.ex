@@ -10,7 +10,7 @@ defmodule CloudfrontSigner.Distribution do
   @doc """
   Creates a `Distribution.t` record from the contents of `Application.get_env(app, scope)`
   """
-  @spec from_config(atom, atom) :: t
+  @spec from_config(atom(), atom()) :: t()
   def from_config(app, scope) do
     app
     |> Application.get_env(scope)
@@ -20,7 +20,14 @@ defmodule CloudfrontSigner.Distribution do
     |> from_map()
   end
 
-  @spec from_map(map) :: t
+  @doc """
+  Creates a `Distribution` struct from a map of attributes.
+
+  If the map contains a `:private_key` that is a binary PEM string, it will be decoded
+  into its internal representation. Other attributes (`:domain` and `:key_pair_id`) are
+  copied as-is into the struct.
+  """
+  @spec from_map(map()) :: t()
   def from_map(map), do: __MODULE__ |> struct(map) |> decode_pk()
 
   defp parse_config({:domain, value}), do: {:domain, read_value(value)}

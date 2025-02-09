@@ -4,8 +4,35 @@ defmodule CloudfrontSigner.Policy do
   """
   defstruct [:resource, :expiry]
 
-  @type t :: %__MODULE__{}
+  @type t :: %__MODULE__{
+          resource: String.t(),
+          expiry: integer()
+        }
 
+  @doc """
+  Generates a CloudFront URL signature and policy for a given resource.
+
+  Takes a policy struct containing the resource URL and expiry time, along with an RSA private key,
+  and returns a tuple containing the URL-safe base64 encoded signature and the base64 encoded policy.
+
+  The signature is generated using SHA-1 with RSA encryption (SHA1withRSA) and is URL-safe encoded.
+  The policy is a JSON document that specifies what resource is being accessed and when the signature expires.
+
+  ## Parameters
+
+    * `policy` - A `Policy` struct containing:
+      * `resource` - The URL of the CloudFront resource to be accessed
+      * `expiry` - Unix timestamp when the signature should expire
+    * `private_key` - An RSA private key in ASN.1 format (decoded from PEM)
+
+  ## Returns
+
+    * `{signature, encoded_policy}` where:
+      * `signature` - URL-safe base64 encoded signature
+      * `encoded_policy` - Base64 encoded JSON policy document
+
+  """
+  @spec generate_signature_and_policy(t(), :public_key.rsa_private_key()) :: {String.t(), String.t()}
   def generate_signature_and_policy(%__MODULE__{} = policy, private_key) do
     policy_as_str =
       policy.resource

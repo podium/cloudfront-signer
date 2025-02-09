@@ -10,6 +10,10 @@ defmodule CloudfrontSigner.DistributionRegistry do
     Agent.start_link(fn -> %{} end, name: __MODULE__)
   end
 
+  @doc """
+  Gets a distribution from the registry. If not found, creates it from config and caches it.
+  """
+  @spec get_distribution(atom(), atom()) :: Distribution.t()
   def get_distribution(scope, key) do
     Agent.get_and_update(
       __MODULE__,
