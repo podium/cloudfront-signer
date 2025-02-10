@@ -1,7 +1,7 @@
 # CloudfrontSigner
 
 Elixir implementation of Cloudfront's url signature algorithm. Supports expiration policies and
-runtime configurable distributions. Fork of https://github.com/Frameio/cloudfront-signer.
+runtime configurable distributions.
 
 The main benefits that this library provides are:
 
