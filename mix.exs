@@ -16,7 +16,7 @@ defmodule CloudfrontSigner.MixProject do
       dialyzer: [
         ignore_warnings: ".dialyzer.ignore-warnings",
         list_unused_filters: true,
-        plt_add_apps: [:mix, :public_key],
+        plt_add_apps: [:mix],
         plt_file: {:no_warn, "priv/plts/project.plt"},
         plt_core_path: "priv/plts/core.plt"
       ],
