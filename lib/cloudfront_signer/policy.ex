@@ -25,18 +25,18 @@ defmodule CloudfrontSigner.Policy do
   - otherPrimeInfos - Optional additional prime info (usually :asn1_NOVALUE)
   """
   @type rsa_private_key :: {
-    :RSAPrivateKey,
-    :"two-prime",
-    non_neg_integer(),
-    non_neg_integer(),
-    non_neg_integer(),
-    non_neg_integer(),
-    non_neg_integer(),
-    non_neg_integer(),
-    non_neg_integer(),
-    non_neg_integer(),
-    :asn1_NOVALUE | [non_neg_integer()]
-  }
+          :RSAPrivateKey,
+          :"two-prime",
+          non_neg_integer(),
+          non_neg_integer(),
+          non_neg_integer(),
+          non_neg_integer(),
+          non_neg_integer(),
+          non_neg_integer(),
+          non_neg_integer(),
+          non_neg_integer(),
+          :asn1_NOVALUE | [non_neg_integer()]
+        }
 
   @doc """
   Generates a CloudFront URL signature and policy for a given resource.
