@@ -9,6 +9,35 @@ defmodule CloudfrontSigner.Policy do
           expiry: integer()
         }
 
+  @typedoc """
+  Type definition for an RSA private key in ASN.1 format.
+  The tuple elements represent:
+  - :RSAPrivateKey - The key type identifier
+  - :"two-prime" - The RSA version identifier
+  - modulus - The RSA modulus n
+  - publicExponent - The public exponent e
+  - privateExponent - The private exponent d
+  - prime1 - The first prime factor p of n
+  - prime2 - The second prime factor q of n
+  - exponent1 - d mod (p-1)
+  - exponent2 - d mod (q-1)
+  - coefficient - The CRT coefficient q^(-1) mod p
+  - otherPrimeInfos - Optional additional prime info (usually :asn1_NOVALUE)
+  """
+  @type rsa_private_key :: {
+    :RSAPrivateKey,
+    :"two-prime",
+    non_neg_integer(),
+    non_neg_integer(),
+    non_neg_integer(),
+    non_neg_integer(),
+    non_neg_integer(),
+    non_neg_integer(),
+    non_neg_integer(),
+    non_neg_integer(),
+    :asn1_NOVALUE | [non_neg_integer()]
+  }
+
   @doc """
   Generates a CloudFront URL signature and policy for a given resource.
 
@@ -32,7 +61,7 @@ defmodule CloudfrontSigner.Policy do
       * `encoded_policy` - Base64 encoded JSON policy document
 
   """
-  @spec generate_signature_and_policy(t(), :public_key.rsa_private_key()) :: {String.t(), String.t()}
+  @spec generate_signature_and_policy(t(), rsa_private_key()) :: {String.t(), String.t()}
   def generate_signature_and_policy(%__MODULE__{} = policy, private_key) do
     policy_as_str =
       policy.resource
