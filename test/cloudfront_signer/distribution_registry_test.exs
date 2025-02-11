@@ -1,15 +1,30 @@
 defmodule CloudfrontSigner.DistributionRegistryTest do
   use ExUnit.Case, async: true
 
-  describe "#get_distribution/2" do
-    test "It will get a registry and save it internally" do
-      distribution =
-        CloudfrontSigner.DistributionRegistry.get_distribution(
-          :cloudfront_signer,
-          CloudfrontSignerTest
-        )
+  alias CloudfrontSigner.Distribution
+  alias CloudfrontSigner.DistributionRegistry
 
-      assert distribution.domain == "https://somewhere.cloudfront.com"
+  setup do
+    start_supervised!(DistributionRegistry)
+    :ok
+  end
+
+  describe "get_distribution/2" do
+    test "returns cached distribution" do
+      first_distribution = DistributionRegistry.get_distribution(:cloudfront_signer, __MODULE__)
+      second_distribution = DistributionRegistry.get_distribution(:cloudfront_signer, __MODULE__)
+
+      assert %Distribution{} = first_distribution
+      assert first_distribution == second_distribution
+      assert first_distribution.domain =~ "cloudfront.net"
+    end
+
+    test "creates and caches new distribution from config" do
+      distribution = DistributionRegistry.get_distribution(:cloudfront_signer, __MODULE__)
+
+      assert %Distribution{} = distribution
+      assert distribution.domain =~ "cloudfront.net"
+      assert ^distribution = DistributionRegistry.get_distribution(:cloudfront_signer, __MODULE__)
     end
   end
 end

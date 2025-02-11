@@ -2,13 +2,13 @@ defmodule CloudfrontSigner.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/podium/cloudfront-signer"
-  @version "0.2.0"
+  @version "1.0.0"
 
   def project do
     [
       app: :cloudfront_signer,
       version: @version,
-      elixir: "~> 1.16",
+      elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
       source_url: @source_url,
       deps: deps(),
@@ -27,8 +27,7 @@ defmodule CloudfrontSigner.MixProject do
 
   def application do
     [
-      mod: {CloudfrontSigner.Application, []},
-      extra_applications: [:logger]
+      extra_applications: [:logger, :public_key]
     ]
   end
 
@@ -38,7 +37,7 @@ defmodule CloudfrontSigner.MixProject do
       {:dialyxir, "~> 1.4", only: [:dev], runtime: false},
       {:ex_doc, "~> 0.36", only: [:dev], runtime: false},
       {:jason, "~> 1.4"},
-      {:timex, "~> 3.7"}
+      {:styler, "~> 1.3", only: [:dev, :test], runtime: false}
     ]
   end
 
